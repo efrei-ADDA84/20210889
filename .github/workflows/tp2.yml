@@ -33,6 +33,8 @@ jobs:
         with:
           context: ./TP2
           push: true
-          tags: madkash/tp2:$(date)
+          tags: |
+            madkash/tp2:0.3.5
+            madkash/tp2:$(date +%Y-%m-%d)
           image: madkash/tp2:0.3.5
 
