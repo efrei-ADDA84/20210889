@@ -11,7 +11,6 @@ ARG LONG
 ARG API_KEY
 
 # On ajoute tous les fichers du repertoire courant dans le docker image
-# On peut se contenter seulement du fichier apy.py
-COPY . .
+COPY api.py .
 
 CMD ["python3", "api.py"]

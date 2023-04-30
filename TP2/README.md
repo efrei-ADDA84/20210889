@@ -1,21 +1,27 @@
-Créer un repository Github avec pour nom votre identifiant EFREI
-DONE
+J'ai realise ce TP sur une VM Ubuntu pour que ca soit plus facile de lancer les commandes bash. Des commentaires de code sont egalement presents dans les fichiers.
 
-Créer un wrapper qui retourne la météo d'un lieu donné avec sa latitude et sa longitude (passées en variable d'environnement) en utilisant openweather API dans le langage de programmation de votre choix (bash, python, go, nodejs, etc)
-Pour cette etape, j'ai cree : 
-	- un fichier python main.py dans lequel j'ai defini des variables permettant de recuperer les variables d'environnement, pour ensuite les introduire dans l'URL qui est utilisee pour effectuer la requete API.
-	- un fichier Dockerfile, dans lequel je definis mon environnement, avec la version de l'image python a utiliser pour creer mon image, les packages a installer, les variables d'environnement, les fichiers a ajouter dans l'image et le fichier python a executer
+Configurer un workflow Github Action :
+Pour creer mon workflow, dans la section "Actions" de mon repositoire Github, je clicke sur "Configure" de "Docker Image" pour creer mon workflow. Puis, je donne un nom au fichier yml et complete le code. Ensuite, je commit et regarde les logs du build dans "Actions".
 
+Transformer un wrapper en API :
+Pour transformer mon wrapper en API, je creer un fichier Python dans laquelle j'implemente une application Flask. J'avais vu en cherchant sur Internet qu'on pouvait utiliser differentes technologies pour implementer notre propre API comme FastAPI, mais comme en entreprise on utilisait Flask, je suis donc parti sur ca.
 
-Packager son code dans une image Docker
-Sur un terminal :
-	- sudo docker build . -t docker101:0.3.2 => construit une nouvelle image Docker en utilisant le Dockerfile present dans le repertoire courant ("."). Le parametre "-t" permet de donner un tag a l'image. Dans ce cas, l'image est nommee "docker101" et sa version est "0.3.2"
-	- sudo docker tag docker101:0.3.2 madkash/tp1:0.3.2 => donne un nouveau nom et une nouvelle etiquette à l'image creee precedement. L'image "docker101:0.3.2" est renommee en "madkash/tp1:0.3.2"
+Publier automatiquement a chaque push sur Docker Hub :
+Dans le fichier yml du workflow, dans la couche "Build and Push" -> "with", on a l'option "push" egal a True, permettant de pousser l'image docker a chaque push dans Git.
 
-Mettre à disposition son image sur DockerHub
-	- on cree un compte docker hub
-	- on cree un nouveau repositoire que j'ai appele "tp1" en mettant la visibilite en publique
-	- dans un terminal, on lance : sudo docker push madkash/tp1:0.3.2 => pousse l'image renommee precedement vers un registre Docker. L'image "madkash/tp1:0.3.2" est poussée vers un registre Docker
+Mettre à disposition son image (format API) sur DockerHub :
+En pushant le code sur Git, cela va automatiquement pusher l'image dans DockerHub.
 
-Mettre à disposition son code dans un repository Github
+Mettre à disposition son code dans un repository Github :
+Apres avoir creer un projet sur Github, il faut lancer dans un terminal les commandes :
+	- git clone https://github.com/efrei-ADDA84/20210889.git
+	- git add -A 
+	- git commit -m "message du commit"
+	- git push
 	
+BONUS :
+Add hadolint to Github workflow before build+push and failed on errors :
+J'ai ajoute une section "Hadolint" dans le fichier yml du workflow.
+
+Aucune données sensibles stockées dans l'image ou le code source (i.e: openweather API key, Docker hub credentials) :
+Comme pour le TP1, j'ai defini une variable d'environnement pour la cle API, et egalement des variables secretes dans Github pour me connecter au DockerHub.

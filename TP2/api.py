@@ -5,21 +5,19 @@ import sys
 
 app = Flask(__name__)
 
+# On definit une requete GET avec un URL par defaut a "/"
 @app.route("/", methods=["GET"])
 def result():
+    # On recupere les parametres "lat" et "lon" de l'API avec la methode "request.args.get"
     lat = request.args.get('lat')
     lon = request.args.get('lon')
-#    api_key = sys.argv[1]
+    # On recupere la variable d'environnement "API_KEY_ definie dans le Dockerfile
     api_key = os.environ.get("API_KEY")
-#    api_key = "a1e0149e963250ea84c1f39140dcc205"
-    print("test 1:", lat)
-    print("test 2:", lon)
-    print("test 3:", api_key)
     url = f'http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric'
     response = requests.get(url)
     return response.json()
      
 if __name__ == "__main__":
-    print("test")
+    # Le port par defaut est 8081
     app.run(debug=True, port=8081)
     
