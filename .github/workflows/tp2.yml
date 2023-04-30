@@ -34,6 +34,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: ./TP2
+          context: ./TP2:0.3.5
           push: true
 
