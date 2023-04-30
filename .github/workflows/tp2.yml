@@ -34,6 +34,8 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: ./TP2:0.3.5
+          context: ./TP2
           push: true
+          tags: madkash/tp2:0.3.5
+          image: madkash/tp2:0.3.5
 
