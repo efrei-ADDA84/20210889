@@ -12,6 +12,13 @@ jobs:
         steps:
         - name: 'Checkout GitHub Action'
           uses: actions/checkout@main
+          
+        - name: 'Login via Azure CLI'
+          uses: azure/login@v1
+          with:
+           client-id: ${{ secrets.REGISTRY_USERNAME }}
+           tenant-id: ${{ secrets.REGISTRY_PASSWORD }}
+           subscription-id: ${{ secrets.AZURE_CREDENTIALS }}
 
         - name: Build and push image
           id: build-image
