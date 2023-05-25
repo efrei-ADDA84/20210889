@@ -13,6 +13,12 @@ jobs:
           uses: azure/login@v1
           with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
+            
+        - name: Set API key environment variable
+          uses: spences10/github-envfile@v2
+          with:
+            envfile: |
+              API_KEY=${{ secrets.API_KEY }}
         
         - name: 'Build and push image'
           uses: azure/docker-login@v1
