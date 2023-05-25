@@ -31,8 +31,8 @@ jobs:
         uses: azure/docker-login@v1
         with:
           login-server: <efreidevopskh.azurecr.io>
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
         
         # Verifie la conformite du Dockerfile a l'aide de Hadolint
       - name: Hadolint
