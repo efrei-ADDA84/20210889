@@ -30,7 +30,7 @@ jobs:
       - name: Login to ACR
         uses: azure/docker-login@v1
         with:
-          login-server: <efreidevopskh.azurecr.io>
+          login-server: efreidevopskh.azurecr.io
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
         
@@ -39,7 +39,7 @@ jobs:
         uses: hadolint/hadolint-action@v3.1.0
         with:
           # Specifie le chemin d'acces au Dockerfile
-          dockerfile: ./TP2/Dockerfile
+          dockerfile: ./TP3/Dockerfile
         
         # Configure Docker Buildx pour la construction d'images
       - name: Set up Docker Buildx
