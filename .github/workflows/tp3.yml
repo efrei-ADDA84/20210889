@@ -1,4 +1,4 @@
-name: Deploy to Azure Container Registry and Azure Container Instance
+name: Azure - ACI
 
 on:
   push:
@@ -25,13 +25,13 @@ jobs:
         with:
           context: .
           dockerfile: Dockerfile
-          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/11002167:v1
+          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/20210889:v1
 
       - name: Deploy to Azure Container Instance
         uses: azure/aci-deploy@v1
         with:
           resource-group: ${{ secrets.RESOURCE_GROUP }}
-          dns-name-label: devops-<identifiant-efrei>
+          dns-name-label: devops-20210889
           location: germany west central
-          images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/11002167:v1
+          images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/20210889:v1
           name: 20210889
