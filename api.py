@@ -18,6 +18,6 @@ def result():
     return response.json()
      
 if __name__ == "__main__":
-    # Le port par defaut est 8081
-    app.run(debug=True, port=8081)
+    # Le port par defaut est 80
+    app.run(debug=True, port=80)
     
