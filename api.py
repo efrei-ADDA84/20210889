@@ -12,8 +12,8 @@ def result():
     lat = request.args.get('lat')
     lon = request.args.get('lon')
     # On recupere la variable d'environnement "API_KEY_ definie dans le Dockerfile
-    api_key = os.environ.get("API_KEY")
-    url = f'http://api.openweathermap.org/data/2.5/?lat={lat}&lon={lon}&appid={api_key}&units=metric'
+    API_KEY = os.environ.get("API_KEY")
+    url = f'http://api.openweathermap.org/data/2.5/?lat={lat}&lon={lon}&appid={API_KEY}&units=metric'
     response = requests.get(url)
     return response.json()
      
