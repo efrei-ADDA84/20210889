@@ -12,11 +12,12 @@ def result():
     lat = request.args.get('lat')
     lon = request.args.get('lon')
     # On recupere la variable d'environnement "API_KEY_ definie dans le Dockerfile
-    api_key = os.environ.get("API_KEY")
+    api_key = "a1e0149e963250ea84c1f39140dcc205"
     url = f'http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric'
     response = requests.get(url)
     return response.json()
      
 if __name__ == "__main__":
-    # Le port par defaut est 8081
-    app.run(debug=True, host='0.0.0.0' port=8081)
+    # Le port par defaut est 80
+    app.run(debug=True, port=80)
+    
