@@ -1,5 +1,5 @@
 on: [push]
-name: Azure ACI
+name: Azure - ACI
 
 jobs:
     build-and-deploy:
