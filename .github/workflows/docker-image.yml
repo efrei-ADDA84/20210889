@@ -17,6 +17,15 @@ jobs:
           with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
             
+        - name: Install Hadolint
+          run: |
+            wget -O /usr/local/bin/hadolint https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64
+            chmod +x /usr/local/bin/hadolint
+
+        - name: Run Hadolint
+          run: hadolint Dockerfile
+          continue-on-error: true
+            
         - name: 'Build and push image'
           uses: azure/docker-login@v1
           with:
