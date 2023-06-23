@@ -1,9 +1,26 @@
-Pour réaliser ce TP, il a fallu configurer un Github workflow.
+Pour pouvoir creer une machine virtuelle dans azure en utilisant Terraform, il a fallu configurer un fichier .tf dans lequel on specifie les ressources necessaires pour la creation.
 
-Pour cela, j'ai pu m'aider de la documentation fourni dans l'énoncé, qui explique comment build et push une image à chaque nouveau commit sur un ACR, et deployer sur un Azure Container Instance (ACI).
+Parfois, il n'etait pas necessaires de creer ces ressources car elles existaient deja, comme le resource group. On les stocke alors dans des variables qu'on peut utiliser depuis le fichier variables.tf
 
-Les principaux problèmes rencontrés était la configuration du workflow, avec le choix du port, l'utilisation d'une variable secrète pour la clé API et la syntaxe en général.
-Mon plus gros problème rencontré était que mon curl ne fonctionnait pas, et cela était dû à mon code Python où il manquait apparement un champ "host" lorsque je faisais tourner mon application Flask.
+Il y a encore des donnees comme le subscription ID et le network, qu'on a defini dans data.tf.
 
-L'avantage d'un Github Action est l'automatisation : on n'a plus besoin de se connecter à une interface graphique ou à une CLI pour déployer, tout se fait désormais en background.
-On peut également ajouter d'autres fonctionnalités au workflow, comme une couche sécurité avec Hadolint et bien d'autres.
+On a egalement les valeursin sorties qu'on definit dans outputs.tf, des elements auxquels on souhaite avoir acces apres la configuration Terraform.
+
+Pour les ressources, il faut faire attention a changer les noms pour qu'il n'y ait pas de concurrence avec les autres elements du resource group.
+
+Ensuite, il suffit de lancer les commandes :
+- terraform init -upgrade
+- terraform plan
+- terraform apply
+
+Pour lancer le projet, avant de faire terraform apply, il faut d'abord lancer terraform plan pour generer le fichier intermediaire terraform.tfstate.
+
+Il faut egalement generer une cle privee a l'aide de la commande :
+- terraform output -raw tls_private_key > id_rsa
+
+Ensuite, pour se connecter a la vm, il faut lancer :
+- ssh -i id_rsa devops@<public_ip_address>
+Il faut changer <public_ip_address> par l'adresse IP correspondante a la vm. Cependant, pour mon cas, cela ne fonctionnait pas. Je recevais toujours le message "Connection Refused" sans information en plus.
+
+Pour ce qui est du formatage du code terraform, il suffit de lancer la commande :
+- terraform fmt
