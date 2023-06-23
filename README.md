@@ -13,8 +13,6 @@ Ensuite, il suffit de lancer les commandes :
 - terraform plan
 - terraform apply
 
-Pour lancer le projet, avant de faire terraform apply, il faut d'abord lancer terraform plan pour generer le fichier intermediaire terraform.tfstate.
-
 Il faut egalement generer une cle privee a l'aide de la commande :
 - terraform output -raw tls_private_key > id_rsa
 
